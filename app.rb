@@ -11,7 +11,8 @@ end
 
 
 get '/' do
-	erb "Start"
+	@posts = Post.order('created_at DESC')
+	erb :index
 end
 
 get '/new' do
@@ -22,7 +23,8 @@ end
 post '/new' do
 	@p = Post.new params[:post]
 	if @p.save
-	  erb "<h2>Спасибо, пост добавлен!</h2>"
+		redirect to '/'
+
 	else
 		@error = @p.errors.full_messages.first
 		erb :new
