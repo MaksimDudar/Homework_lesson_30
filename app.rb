@@ -16,7 +16,7 @@ end
 
 get '/new' do
 	@p = Post.new
-  erb "post"
+  erb :new
 end
 
 post '/new' do
@@ -25,6 +25,6 @@ post '/new' do
 	  erb "<h2>Спасибо, пост добавлен!</h2>"
 	else
 		@error = @p.errors.full_messages.first
-		erb "post"
+		erb :new
 	end
 	end
