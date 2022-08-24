@@ -1,14 +1,9 @@
 <h2>Список постов</h2>
 <% @posts.each do |post| %>
-<p><a href="/post/<%= post.id %>"><%= post.message %></a></p>
-
-<h2>комментарий</h2>
-<% @comments.each do |comment| %>
-<p>
-<p><a href="/comment/<%= comment.id %>"><%= comment.message %></a></p>
-<br />
-<span style="font-size: 75%; color: #999">Added at <%= comment.date %></span>
-  </p>
-  <hr />
-<% end %>
+<p><%= post.message %><p/>
+  Added at <%= post.created_at %>
+  <br />
+  <br />
+  <a href="/post/<%= post['id'] %>">Comments</a>
+<hr />
 <% end %>
