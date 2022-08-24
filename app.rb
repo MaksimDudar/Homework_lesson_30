@@ -13,7 +13,6 @@ end
 
 get '/' do
 	@posts = Post.order('created_at DESC')
-	@comments = Comment.order('created_at DESC')
 	erb :index
 end
 
@@ -33,16 +32,19 @@ post '/new' do
 	end
 	end
 
-get '/post/:post' do
+get '/post/:id' do
+	@d = Comment.new params[:post_id]
+
+	@comments = Comment.order('post_id','created_at DESC')
 	 @c = Comment.new
 		erb :post
 	end
 
-
-post '/comment' do
+post '/comment/post/:id' do
+	@d = Comment.new params[:post_id]
 			@c = Comment.new params[:comment]
 			if @c.save
-				redirect to '/'
+				redirect to '/post/:id'
 			else
 				@error = @p.errors.full_messages.first
 				erb :post
